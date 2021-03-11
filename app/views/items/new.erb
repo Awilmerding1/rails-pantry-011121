@@ -1,0 +1,26 @@
+<h3>Form_for</h3>
+
+<%=form_for(@item) do |f|%>
+  <%=f.label("Item Name:") %>
+  <%=f.text_field(:name) %>
+  <%=f.submit "Submit"%>
+<%end%>
+
+
+
+<h3>Form_tag</h3>
+
+<%=form_tag(items_path) do %>
+  <%= label_tag "Item Name:"%>
+  <%= text_field_tag "name"%>
+  <%=submit_tag "Submit"%>
+<%end%>
+
+<h3>Manual Form</h3>
+
+<form action="/items" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <label>Item Name: </label>
+  <input type="text" name="name">
+  <input type="submit" value="Submit">
+</form>
