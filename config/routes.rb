@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :measurements
   # get '/items', to: "items#index"
   # get '/items/:id', to: "items#show"
   resources(:items)
