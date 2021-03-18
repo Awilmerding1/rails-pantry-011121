@@ -2,15 +2,4 @@
   <li><%=e%></li>
 <%end%>
 
-
-<%=form_for(@item) do |f|%>
-  <%=f.label("Item Name:") %>
-  <%=f.text_field(:name) %>
-  <%=f.fields_for :measurements do |m| %>
-    <%=m.label "Quantity"%>
-    <%=m.number_field :quantity%>
-    <%=m.label "Units"%>
-    <%=m.text_field :unit%>
-  <%end%>
-  <%=f.submit "Submit"%>
-<%end%>
+<%=render('form')%>

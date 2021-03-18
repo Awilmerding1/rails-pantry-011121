@@ -3,9 +3,7 @@
 <p><%=@item.name%></p>
 
 
-<%@item.measurements.each do |m|%>
-  <li><%=m.quantity%> <%=m.unit%></li>
-<%end%>
+<%=render partial: 'measurements/measurements', locals: {measurements: @item.measurements, index: false}%>
 
 
 <%=link_to "Edit",  edit_item_path(@item)%>

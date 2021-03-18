@@ -1,5 +1,14 @@
 class MeasurementsController < ApplicationController
 
+    layout "application"
+
+  def index
+    if params[:quantity]
+      @measurements = Measurement.quantity_search(params[:quantity])
+    else
+      @measurements = Measurement.all
+    end
+  end
 
   def new
     @measurement = Measurement.new
@@ -18,7 +27,6 @@ class MeasurementsController < ApplicationController
     #   render :new
     # end
   end
-
 
 
 
