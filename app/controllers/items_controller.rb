@@ -5,8 +5,12 @@ class ItemsController < ApplicationController
   layout "application"
 
   def index
-
-    @items = Item.all
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @items = user.items
+    else
+      @items = Item.all
+    end
   end
 
   def show

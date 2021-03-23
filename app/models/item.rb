@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   validate :is_title_case
   before_validation :make_title_case
   has_many :measurements
+  has_many :users, through: :measurements
 
   accepts_nested_attributes_for :measurements
   # validates_presence_of :name

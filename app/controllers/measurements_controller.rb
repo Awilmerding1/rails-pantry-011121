@@ -11,13 +11,24 @@ class MeasurementsController < ApplicationController
   end
 
   def new
-    @measurement = Measurement.new
-    @items = Item.all
+    if params[:item_id]
+      @item = Item.find_by(id: params[:item_id])
+      @measurement = @item.measurements.build
+      @items = Item.all
+    else
+      @measurement = Measurement.new
+      @items = Item.all
+    end
+
   end
 
   def create
     @measurement = Measurement.create(measurement_params)
-
+    @measurement.user = current_user
+    if params[:item_id]
+      @measurement.item_id = params[:item_id]
+    end
+    @measurement.save
     redirect_to items_path
     # if @measurement.save
     #     redirect_to item_path(@item)
