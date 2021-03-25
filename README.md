@@ -1,24 +1,13 @@
-# README
+# To-Dos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Associate items/measurements with users
+2. User helper methods (logged_id, redirect_if_not_logged_in)
+3. Protect Patch/Delete
+4. More partials/error messages
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+# Add'l
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. form_with
+2. custom fields_for
