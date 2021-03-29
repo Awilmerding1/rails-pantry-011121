@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action(:require_login, except: [:new, :create])
+
   def new
     @user = User.new
   end
@@ -10,12 +12,9 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_items_path(@user)
     else
-      @errors = @user.errors.full_messages
       render :new
     end
   end
-
-
 
 
   private

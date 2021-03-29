@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action(:set_item, except: [:index, :new, :create])
+  before_action(:require_login)
 
   layout "application"
 
@@ -19,30 +20,31 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @item.measurements.build
+    @item.measurements.build(user: current_user)
+    @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
   end
 
   def create
     @item = Item.new(item_params)
+    @item.measurements.each {|m| m.user = current_user}
+    # binding.pry
     if @item.save
         redirect_to item_path(@item)
     else
-      # redirect_to new_item_path
-      @errors = @item.errors.full_messages
       render :new
     end
   end
 
   def edit
-
+      @measurements = @item.measurements.where(user_id: current_user.id)
   end
 
   def update
-
+    # binding.pry
     if @item.update(item_params)
       redirect_to(item_path(@item))
     else
-      @errors = @item.errors.full_messages
+      @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
       render :edit
     end
   end
@@ -57,7 +59,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity])
+      params.require(:item).permit(:name, measurements_attributes: [:unit, :quantity, :user_id, :id])
     end
 
     def set_item

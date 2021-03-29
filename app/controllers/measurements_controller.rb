@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-
+    before_action(:require_login)
     layout "application"
 
   def index
@@ -28,8 +28,12 @@ class MeasurementsController < ApplicationController
     if params[:item_id]
       @measurement.item_id = params[:item_id]
     end
-    @measurement.save
-    redirect_to items_path
+    if @measurement.save
+      redirect_to items_path
+    else
+        @items = Item.all
+       render :new
+    end
     # if @measurement.save
     #     redirect_to item_path(@item)
     # else

@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   #     self.measurements.build(hash)
   #   end
   # end
-  #
+  # #
 
 
   def is_title_case
