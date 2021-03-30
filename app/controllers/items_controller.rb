@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.measurements.build(user: current_user)
+    @item.measurements.build(user: current_user)
     @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
   end
 
@@ -31,6 +32,7 @@ class ItemsController < ApplicationController
     if @item.save
         redirect_to item_path(@item)
     else
+      @measurements = @item.measurements.select{|m| m.user_id == current_user.id}
       render :new
     end
   end

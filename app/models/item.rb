@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   has_many :measurements
   has_many :users, through: :measurements
 
-  accepts_nested_attributes_for :measurements
+  # accepts_nested_attributes_for :measurements
   # validates_presence_of :name
   # validates :name, presence: true, name: true
   # validate :custom_presence_validator
@@ -17,11 +17,16 @@ class Item < ApplicationRecord
   #   end
   # end
 
-  # def measurements_attributes=(attrs)
-  #   attrs.values.each do |hash|
-  #     self.measurements.build(hash)
-  #   end
-  # end
+  def measurements_attributes=(attrs)
+    attrs.values.each do |hash|
+      if hash[:id]
+        m = Measurement.find_by(id: hash[:id])
+        m.update(hash)
+      else
+        self.measurements.build(hash)
+      end
+    end
+  end
   # #
 
 

@@ -1,8 +1,8 @@
-<%=form_for(@item) do |f|%>
+<%=form_with(model: @item, builder: CustomFormBuilder) do |f|%>
   <%=f.label("Item Name:") %>
   <%=f.text_field(:name) %>
   <%=f.label("Measurements:") %>
-  <%=f.fields_for :measurements, @measurements do |m| %>
+  <%=f.my_fields_for(:measurements) do |m| %>
     <%=m.label "Quantity"%>
     <%=m.number_field :quantity%>
     <%=m.label "Units"%>
