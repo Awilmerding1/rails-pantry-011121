@@ -3,11 +3,11 @@ Rails.application.routes.draw do
     resources(:items, except: [:show, :edit, :update, :destroy, :put])
   end
 
-  resources(:items, except: :put) do
+  resources(:items, except: [:put, :edit, :patch, :destroy, :update]) do
     resources :measurements, only: [:new, :create]
   end
 
-  resources :measurements, only: [:new, :create, :index]
+  resources :measurements, only: [:new, :create, :index, :edit, :update]
   # get '/items', to: "items#index"
   # get '/items/:id', to: "items#show"
   get '/signup', to: "users#new", as: "signup"

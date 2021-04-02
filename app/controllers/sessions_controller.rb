@@ -26,14 +26,17 @@ class SessionsController < ApplicationController
     end
     if user.save
       session[:user_id] = user.id
+      flash[:message] = "Successfully logged in!"
       redirect_to user_items_path(user)
     else
+      flash[:message] = "Login failed!"
       redirect_to signup_path
     end
   end
 
   def destroy
     session.clear
+    flash[:message] = "Successfully logged out!"
     redirect_to '/signup'
   end
 

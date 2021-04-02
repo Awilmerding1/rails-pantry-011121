@@ -1,4 +1,4 @@
 
 <%measurements.each do |m|%>
-  <li><%=m.quantity%> <%=m.unit%> <%=show_item_name(m, index)%></li>
+  <li><%=m.quantity%> <%=m.unit%> <%=show_item_name(m, index)%> <%= (m.user == current_user) ? (link_to "Edit", edit_measurement_path(m)) : (nil) %></li>
 <%end%>

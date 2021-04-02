@@ -25,7 +25,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     if object.methods.include?(association.to_sym) && object.methods.include?(association_attributes_method.to_sym)
 
         collection_for_iteration = collection ||  object.send(association)
-
+    
        collection_for_iteration.each_with_index.map do |a, i|
            new_object_name = "#{object_class_downcase}[#{association_attributes}][#{i}]"
            new_form_builder = CustomFormBuilder.new(new_object_name, a, @template, @options)
@@ -33,6 +33,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
          yield(new_form_builder)
          # binding.pry
          if a.id
+           # self.hidden_field(:id)
            new_form_builder.hidden_field(:id)
          end
        end
